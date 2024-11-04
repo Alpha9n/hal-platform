@@ -1,0 +1,7 @@
+-- 作成
+CREATE DATABASE ;
+USE ;
+CREATE TABLE ;
+
+-- テストデータ生成
+INSERT INTO () ;
