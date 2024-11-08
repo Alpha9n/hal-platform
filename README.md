@@ -32,7 +32,6 @@ git clone https://github.com/mentai-pasta/hal-auction
 cd ../../
 docker-compose up --build
 ```
-<!-- TODO: DBの初期化手順の記載 -->
 
 ## 命名規則について
 - ディレクトリ名: ケバブケース               (e.g. sample-project)

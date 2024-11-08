@@ -1,6 +1,22 @@
 version: '3'
 
 services:
+  postgres:
+    container_name: postgres
+    build: ./docker-files/database
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./docker-files/database/init-files:/docker-entrypoint-initdb.d"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
   node:
     container_name: node
+    build: ./docker-files/node
+    ports:
+      - "8080:8080" # backend
+      - "3000:3000" # frontend
+    volumes:
+      - "./docker-files/node/projects:/home/projects"
     

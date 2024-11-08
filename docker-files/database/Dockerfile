@@ -1,1 +1,2 @@
-#TODO: データベースを自動で初期化するか決める
+FROM postgres:latest
+
