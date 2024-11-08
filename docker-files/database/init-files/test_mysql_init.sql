@@ -22,7 +22,7 @@ CREATE TABLE "stocks" (
 	"updated_at" TIMESTAMP NOT NULL,
 	"auction_id" UUID NOT NULL,
 	"vehicle_id" UUID NOT NULL,
-	"sold_status" UUID NOT NULL,
+	"sold_status_id" UUID NOT NULL,
 	"begin_time" TIMESTAMP NOT NULL,
 	PRIMARY KEY("stock_id")
 );
@@ -123,6 +123,7 @@ CREATE TABLE "customers" (
 	PRIMARY KEY("customer_id")
 );
 
+
 ALTER TABLE "auctions"
 ADD FOREIGN KEY("auction_id") REFERENCES "stocks"("auction_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
@@ -151,7 +152,7 @@ ALTER TABLE "contacts"
 ADD FOREIGN KEY("employee_id") REFERENCES "employees"("employee_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE "sold_statuses"
-ADD FOREIGN KEY("sold_status_id") REFERENCES "stocks"("sold_status")
+ADD FOREIGN KEY("sold_status_id") REFERENCES "stocks"("sold_status_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE "bids"
 ADD FOREIGN KEY("stock_id") REFERENCES "stocks"("stock_id")
