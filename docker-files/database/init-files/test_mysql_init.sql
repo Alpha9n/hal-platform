@@ -64,7 +64,7 @@ CREATE TABLE "notifications" (
 	"body" VARCHAR(255),
 	"created_at" TIMESTAMP NOT NULL,
 	"updated_at" TIMESTAMP NOT NULL,
-	"emplyee_id" UUID NOT NULL,
+	"employee_id" UUID NOT NULL,
 	"deploy_schedule" TIMESTAMP,
 	"deploy_status_id" UUID,
 	PRIMARY KEY("notification_id")
@@ -122,8 +122,8 @@ CREATE TABLE "customers" (
 );
 
 
-ALTER TABLE "auctions"
-ADD FOREIGN KEY("auction_id") REFERENCES "stocks"("auction_id")
+ALTER TABLE "stocks"
+ADD FOREIGN KEY("auction_id") REFERENCES "auctions"("auction_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE "stocks"
 ADD FOREIGN KEY("vehicle_id") REFERENCES "vehicles"("vehicle_id")
@@ -140,8 +140,8 @@ ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE "auctions"
 ADD FOREIGN KEY("employee_id") REFERENCES "employees"("employee_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE "employees"
-ADD FOREIGN KEY("employee_id") REFERENCES "notifications"("emplyee_id")
+ALTER TABLE "notifications"
+ADD FOREIGN KEY("employee_id") REFERENCES "employees"("employee_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE "notifications"
 ADD FOREIGN KEY("deploy_status_id") REFERENCES "deploy_statuses"("deploy_status_id")
@@ -149,8 +149,8 @@ ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE "contacts"
 ADD FOREIGN KEY("employee_id") REFERENCES "employees"("employee_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE "sold_statuses"
-ADD FOREIGN KEY("sold_status_id") REFERENCES "stocks"("sold_status_id")
+ALTER TABLE "stocks"
+ADD FOREIGN KEY("sold_status_id") REFERENCES "sold_statuses"("sold_status_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE "bids"
 ADD FOREIGN KEY("stock_id") REFERENCES "stocks"("stock_id")
