@@ -11,7 +11,13 @@ CREATE TABLE "auctions" (
 	"duration" INTERVAL NOT NULL,
 	"begin_time" TIMESTAMP NOT NULL,
 	PRIMARY KEY("auction_id")
-);
+)
+INSERT INTO "auctions" ("auction_id","created_at","updated_at","employee_id","duration","begin_time") VALUES
+(),
+(),
+(),
+(),
+();
 
 
 CREATE TABLE "stocks" (
@@ -23,8 +29,13 @@ CREATE TABLE "stocks" (
 	"sold_status_id" UUID NOT NULL,
 	"begin_time" TIMESTAMP NOT NULL,
 	PRIMARY KEY("stock_id")
-);
-
+)
+INSERT INTO "stocks" ("stock_id","created_at","updated_at","auction_id","vehicle_id","sold_status_id","begin_time") VALUES
+(),
+(),
+(),
+(),
+();
 
 CREATE TABLE "vehicles" (
 	"vehicle_id" UUID NOT NULL UNIQUE,
@@ -103,8 +114,13 @@ CREATE TABLE "deploy_statuses" (
 	"deploy_status_id" UUID NOT NULL UNIQUE,
 	"name" VARCHAR(255) NOT NULL,
 	PRIMARY KEY("deploy_status_id")
-);
-
+)
+INSERT INTO "deploy_statuses" ("deploy_status_id","name") VALUES
+(),
+(),
+(),
+(),
+();
 
 CREATE TABLE "contacts" (
 	"contact_id" UUID NOT NULL UNIQUE,
@@ -115,15 +131,25 @@ CREATE TABLE "contacts" (
 	"created_at" TIMESTAMP,
 	"updated_at" TIMESTAMP,
 	PRIMARY KEY("contact_id")
-);
-
+)
+INSERT INTO "contacts" ("contact_id","customer_id","title","body","employee_id","created_at","update_at") VALUES
+(),
+(),
+(),
+(),
+();
 
 CREATE TABLE "sold_statuses" (
 	"sold_status_id" UUID NOT NULL UNIQUE,
 	"name" VARCHAR(255) NOT NULL,
 	PRIMARY KEY("sold_status_id")
-);
-
+)
+INSERT INTO "sold_statuses" ("sold_status_id","name") VALUES
+(),
+(),
+(),
+(),
+();
 
 CREATE TABLE "bids" (
 	"bid_id" UUID NOT NULL UNIQUE,
@@ -132,8 +158,13 @@ CREATE TABLE "bids" (
 	"price" NUMERIC,
 	"created_at" TIMESTAMP,
 	PRIMARY KEY("bid_id")
-);
-
+)
+INSERT INTO "bids" ("bid_id","customer_id","stock_id","price","created_at") VALUES
+(),
+(),
+(),
+(),
+();
 
 CREATE TABLE "customers" (
 	"customer_id" UUID NOT NULL UNIQUE,
@@ -147,8 +178,13 @@ CREATE TABLE "customers" (
 	"created_at" TIMESTAMP,
 	"updated_at" TIMESTAMP,
 	PRIMARY KEY("customer_id")
-);
-
+)
+INSERT INTO "customers" ("customer_id","name","email","prefecture","city","address","post_code"."password_hash","created_at","updated_at") VALUES
+(),
+(),
+(),
+(),
+();
 
 ALTER TABLE "stocks"
 ADD FOREIGN KEY("auction_id") REFERENCES "auctions"("auction_id")
