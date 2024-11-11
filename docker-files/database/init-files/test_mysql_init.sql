@@ -40,7 +40,13 @@ CREATE TABLE "series" (
 	"series_id" UUID NOT NULL UNIQUE,
 	"name" VARCHAR(255),
 	PRIMARY KEY("series_id")
-);
+)
+INSERT INTO "series" ("series_id","name",) VALUES
+(4b8dd422-f42b-6a62-63fd-4b1d215f6db6,'ホンダN-BOX'),
+(934b41ba-77af-2e6a-b247-4ef8045a752d,'トヨタプリウス'),
+(070acf9c-921e-2161-cdf0-1518e2301fb7,'ダイハツタント'),
+(7f335ca3-8c42-3cf0-54f5-0d3eaf3c568f,'日産セレナ'),
+(3ec04aac-5fef-9dcd-74f6-98be281bbb26,'トヨタアルファード');
 
 
 CREATE TABLE "employees" (
