@@ -80,8 +80,12 @@ CREATE TABLE "notifications" (
 	"deploy_status_id" UUID,
 	PRIMARY KEY("notification_id")
 )
-
-
+INSERT INTO "notifications" ("notification_id","title","body","created_at","updated_at","employee_id","deploy_schedule","deploy_status_id") VALUES
+(e0ad24ca-34d6-5c63-87d4-51ea39a597fe,"タイトル1","本文1",2024-11-5 12:00,2024-11-5 12:00,cd6c194b-aecb-8bac-c7cf-ad569ee9d5ea,2024-11-5 12:00,6200ea20-fd84-480e-d887-62b4b3c37876),
+(4dd26aee-d823-a7c0-4f8b-3cab7428dd29,"タイトル2","本文2",2024-11-5 12:00,2024-11-5 12:00,2c17a0db-6e8f-46cd-28d4-4b7e2f5ac535,2024-11-5 12:00,3f6f6b72-dbbc-845d-f056-31ca0933d51c),
+(93b2cc4f-af6f-02b4-3c6b-f63d6d3fe6f2,"タイトル3","本文3",2024-11-5 12:00,2024-11-5 12:00,311c98c1-a4a7-bd35-47e6-6afd4164f746,2024-11-5 12:00,5ffd534c-29c6-bca8-47ea-e685bf361e09),
+(42402878-df77-9149-01e0-4139080f458c,"タイトル4","本文4",2024-11-5 12:00,2024-11-5 12:00,d010edab-2d99-5d27-d6a1-db89fabd7657,2024-11-5 12:00,9c079ce2-11f7-404e-0aac-f6667dbbf349),
+(80eb70cf-1075-c29c-86b1-ed6d0e26dceb,"タイトル5","本文5",2024-11-5 12:00,2024-11-5 12:00,2ae3f345-6b17-7171-612d-de2f5a23cd98,2024-11-5 12:00,805fef9c-39c0-4840-ba2d-77a7b844e476);
 
 CREATE TABLE "deploy_statuses" (
 	"deploy_status_id" UUID NOT NULL UNIQUE,
