@@ -33,7 +33,13 @@ CREATE TABLE "vehicles" (
 	"series_id" UUID NOT NULL,
 	"employee_id" UUID NOT NULL,
 	PRIMARY KEY("vehicle_id")
-);
+)
+INSERT INTO "vehicles" ("vehicle_id","created_at","update_at","series_id","employee_id") VALUES
+(c1ef68d4-4675-49c5-63dc-4adc52284d82,2024-11-5 12:00,2024-11-5 12:00,4b8dd422-f42b-6a62-63fd-4b1d215f6db6,cd6c194b-aecb-8bac-c7cf-ad569ee9d5ea),
+(51553287-933d-8fb9-399a-0af28821d357,2024-11-5 12:00,2024-11-5 12:00,934b41ba-77af-2e6a-b247-4ef8045a752d,2c17a0db-6e8f-46cd-28d4-4b7e2f5ac535),
+(61fa1bab-1109-21da-dc89-8c1c519d1a43,2024-11-5 12:00,2024-11-5 12:00,070acf9c-921e-2161-cdf0-1518e2301fb7,311c98c1-a4a7-bd35-47e6-6afd4164f746),
+(37992583-daca-a449-73d2-cfb80946714a,2024-11-5 12:00,2024-11-5 12:00,7f335ca3-8c42-3cf0-54f5-0d3eaf3c568f,d010edab-2d99-5d27-d6a1-db89fabd7657),
+(614cd781-4e09-1d1f-e039-d9cc15f6af68,2024-11-5 12:00,2024-11-5 12:00,3ec04aac-5fef-9dcd-74f6-98be281bbb26,2ae3f345-6b17-7171-612d-de2f5a23cd98);
 
 
 CREATE TABLE "series" (
