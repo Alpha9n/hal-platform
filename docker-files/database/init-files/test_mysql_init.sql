@@ -56,7 +56,11 @@ CREATE TABLE "job_types" (
 	"name" VARCHAR(255) NOT NULL,
 	PRIMARY KEY("job_type_id")
 );
-
+INSERT INTO job_types (job_type_id,name) VALUES(bf714521-b003-b0c0-1eeb-9ca10b102406,'車両調達担当者');
+INSERT INTO job_types (job_type_id,name) VALUES(3af3d477-08b7-88b4-9209-085289b3200e,'経理');
+INSERT INTO job_types (job_type_id,name) VALUES(af86a3f5-58ea-86e1-89ce-9fcf543428a5,'総務');
+INSERT INTO job_types (job_type_id,name) VALUES(a126cd31-2c67-c62d-b3db-2a26e59a7d6c,'車両調達担当者');
+INSERT INTO job_types (job_type_id,name) VALUES(1b77802c-6db4-bf84-3d64-7fee92a6eb93,'専務');
 
 CREATE TABLE "notifications" (
 	"notification_id" UUID NOT NULL UNIQUE,
