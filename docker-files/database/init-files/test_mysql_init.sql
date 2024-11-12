@@ -11,7 +11,7 @@ CREATE TABLE "auctions" (
 	"duration" INTERVAL NOT NULL,
 	"begin_time" TIMESTAMP NOT NULL,
 	PRIMARY KEY("auction_id")
-)
+);
 INSERT INTO "auctions" ("auction_id","created_at","updated_at","employee_id","duration","begin_time") VALUES
 ('07c3ce66-bda2-4e10-3752-8665cd96b26d','2024-11-5 12:00','2024-11-5 12:00','cd6c194b-aecb-8bac-c7cf-ad569ee9d5ea',interval'30 minutes','2024-11-10 12:00'),
 ('25003906-2bad-24a9-e3d4-e299f9e40063','2024-11-5 12:00','2024-11-5 12:00','2c17a0db-6e8f-46cd-28d4-4b7e2f5ac535',interval'30 minutes','2024-11-10 12:00'),
@@ -29,7 +29,7 @@ CREATE TABLE "stocks" (
 	"sold_status_id" UUID NOT NULL,
 	"begin_time" TIMESTAMP NOT NULL,
 	PRIMARY KEY("stock_id")
-)
+);
 INSERT INTO "stocks" ("stock_id","created_at","updated_at","auction_id","vehicle_id","sold_status_id","begin_time") VALUES
 ('7996ba52-eb36-09da-a21a-978e6cae937f','2024-11-5 12:00','2024-11-5 12:00','07c3ce66-bda2-4e10-3752-8665cd96b26d','c1ef68d4-4675-49c5-63dc-4adc52284d82','5e1a6f97-72b8-81fa-2e7d-39cc54d982d4','2024-11-10 12:00'),
 ('97775fad-caac-b824-0aa4-bfc2f20e38e4','2024-11-5 12:00','2024-11-5 12:00','25003906-2bad-24a9-e3d4-e299f9e40063','51553287-933d-8fb9-399a-0af28821d357','a6461049-839c-faac-156b-276391c67b4b','2024-11-10 12:00'),
@@ -40,12 +40,12 @@ INSERT INTO "stocks" ("stock_id","created_at","updated_at","auction_id","vehicle
 CREATE TABLE "vehicles" (
 	"vehicle_id" UUID NOT NULL UNIQUE,
 	"created_at" TIMESTAMP NOT NULL,
-	"update_at" TIMESTAMP NOT NULL,
+	"updated_at" TIMESTAMP NOT NULL,
 	"series_id" UUID NOT NULL,
 	"employee_id" UUID NOT NULL,
 	PRIMARY KEY("vehicle_id")
-)
-INSERT INTO "vehicles" ("vehicle_id","created_at","update_at","series_id","employee_id") VALUES
+);
+INSERT INTO "vehicles" ("vehicle_id","created_at","updated_at","series_id","employee_id") VALUES
 ('c1ef68d4-4675-49c5-63dc-4adc52284d82','2024-11-5 12:00','2024-11-5 12:00','4b8dd422-f42b-6a62-63fd-4b1d215f6db6','cd6c194b-aecb-8bac-c7cf-ad569ee9d5ea'),
 ('51553287-933d-8fb9-399a-0af28821d357','2024-11-5 12:00','2024-11-5 12:00','934b41ba-77af-2e6a-b247-4ef8045a752d','2c17a0db-6e8f-46cd-28d4-4b7e2f5ac535'),
 ('61fa1bab-1109-21da-dc89-8c1c519d1a43','2024-11-5 12:00','2024-11-5 12:00','070acf9c-921e-2161-cdf0-1518e2301fb7','311c98c1-a4a7-bd35-47e6-6afd4164f746'),
@@ -58,7 +58,7 @@ CREATE TABLE "series" (
 	"name" VARCHAR(255),
 	"manufacturer_id" UUID NOT NULL,
 	PRIMARY KEY("series_id")
-)
+);
 INSERT INTO "series" ("series_id","name","manufacturer_id") VALUES
 ('4b8dd422-f42b-6a62-63fd-4b1d215f6db6','N-BOX','ef532ea5-0aaf-b4a8-b93c-2b3e83adb7aa'),
 ('934b41ba-77af-2e6a-b247-4ef8045a752d','プリウス','a56df6e6-c5c3-eaf6-5b43-eaa5a93735bc'),
@@ -70,7 +70,7 @@ CREATE TABLE "manufacturers" (
 	"manufacturer_id" UUID NOT NULL UNIQUE,
 	"name" VARCHAR(255) NOT NULL,
 	PRIMARY KEY("manufacturer_id")
-)
+);
 INSERT INTO manufacturers ("manufacturer_id","name") VALUES
 ('ef532ea5-0aaf-b4a8-b93c-2b3e83adb7aa','ホンダ'),
 ('a56df6e6-c5c3-eaf6-5b43-eaa5a93735bc','トヨタ'),
@@ -84,7 +84,7 @@ CREATE TABLE "employees" (
 	"name" VARCHAR(255) NOT NULL,
 	"job_type_id" UUID NOT NULL,
 	PRIMARY KEY("employee_id")
-)
+);
 INSERT INTO "employees" ("employee_id","name","job_type_id") VALUES
 ('cd6c194b-aecb-8bac-c7cf-ad569ee9d5ea','sample1','bf714521-b003-b0c0-1eeb-9ca10b102406'),
 ('2c17a0db-6e8f-46cd-28d4-4b7e2f5ac535','sample2','3af3d477-08b7-88b4-9209-085289b3200e'),
@@ -97,7 +97,7 @@ CREATE TABLE "job_types" (
 	"job_type_id" UUID NOT NULL UNIQUE,
 	"name" VARCHAR(255) NOT NULL,
 	PRIMARY KEY("job_type_id")
-)
+);
 INSERT INTO "job_types" ("job_type_id","name") VALUES
 ('bf714521-b003-b0c0-1eeb-9ca10b102406','車両調達担当者'),
 ('3af3d477-08b7-88b4-9209-085289b3200e','経理'),
@@ -115,7 +115,7 @@ CREATE TABLE "notifications" (
 	"deploy_schedule" TIMESTAMP,
 	"deploy_status_id" UUID,
 	PRIMARY KEY("notification_id")
-)
+);
 INSERT INTO "notifications" ("notification_id","title","body","created_at","updated_at","employee_id","deploy_schedule","deploy_status_id") VALUES
 ('e0ad24ca-34d6-5c63-87d4-51ea39a597fe','タイトル1','本文1','2024-11-5 12:00','2024-11-5 12:00','cd6c194b-aecb-8bac-c7cf-ad569ee9d5ea','2024-11-5 12:00','6200ea20-fd84-480e-d887-62b4b3c37876'),
 ('4dd26aee-d823-a7c0-4f8b-3cab7428dd29','タイトル2','本文2','2024-11-5 12:00','2024-11-5 12:00','2c17a0db-6e8f-46cd-28d4-4b7e2f5ac535','2024-11-5 12:00','3f6f6b72-dbbc-845d-f056-31ca0933d51c'),
@@ -127,7 +127,7 @@ CREATE TABLE "deploy_statuses" (
 	"deploy_status_id" UUID NOT NULL UNIQUE,
 	"name" VARCHAR(255) NOT NULL,
 	PRIMARY KEY("deploy_status_id")
-)
+);
 INSERT INTO "deploy_statuses" ("deploy_status_id","name") VALUES
 ('6200ea20-fd84-480e-d887-62b4b3c37876','公開'),
 ('3f6f6b72-dbbc-845d-f056-31ca0933d51c','非公開'),
@@ -145,7 +145,7 @@ CREATE TABLE "contacts" (
 	"updated_at" TIMESTAMP,
 	PRIMARY KEY("contact_id")
 )
-INSERT INTO "contacts" ("contact_id","customer_id","title","body","employee_id","created_at","update_at") VALUES
+INSERT INTO "contacts" ("contact_id","customer_id","title","body","employee_id","created_at","updated_at") VALUES
 ('097f560d-7685-5ac8-eecb-a717311fc9e2','fdd25989-085e-fc11-31f0-a4a25095a47d','タイトル1','内容1','cd6c194b-aecb-8bac-c7cf-ad569ee9d5ea','2024-11-5 12:00','2024-11-5 12:00'),
 ('4ee04815-ebdc-e75a-c8be-b6baf455bb9f','00c1ca81-8425-de90-9189-997acf91a0f0','タイトル2','内容2','2c17a0db-6e8f-46cd-28d4-4b7e2f5ac535','2024-11-5 12:00','2024-11-5 12:00'),
 ('101052bb-2485-5146-2476-4f7c895387ac','fcff5871-cff8-a199-fdbb-a8d0864c5143','タイトル3','内容3','311c98c1-a4a7-bd35-47e6-6afd4164f746','2024-11-5 12:00','2024-11-5 12:00'),
@@ -156,7 +156,7 @@ CREATE TABLE "sold_statuses" (
 	"sold_status_id" UUID NOT NULL UNIQUE,
 	"name" VARCHAR(255) NOT NULL,
 	PRIMARY KEY("sold_status_id")
-)
+);
 INSERT INTO "sold_statuses" ("sold_status_id","name") VALUES
 ('5e1a6f97-72b8-81fa-2e7d-39cc54d982d4','入札開始前'),
 ('a6461049-839c-faac-156b-276391c67b4b','入札受付中'),
@@ -171,7 +171,7 @@ CREATE TABLE "bids" (
 	"price" NUMERIC,
 	"created_at" TIMESTAMP,
 	PRIMARY KEY("bid_id")
-)
+);
 INSERT INTO "bids" ("bid_id","customer_id","stock_id","price","created_at") VALUES
 ('3385f099-f1ed-9603-1454-b34fbb828024','fdd25989-085e-fc11-31f0-a4a25095a47d','7996ba52-eb36-09da-a21a-978e6cae937f',100000,'2024-11-5 12:00'),
 ('6c77b771-b74a-1dd8-694e-9dd5b40fc461','00c1ca81-8425-de90-9189-997acf91a0f0','97775fad-caac-b824-0aa4-bfc2f20e38e4',200000,'2024-11-5 12:00'),
@@ -191,13 +191,13 @@ CREATE TABLE "customers" (
 	"created_at" TIMESTAMP,
 	"updated_at" TIMESTAMP,
 	PRIMARY KEY("customer_id")
-)
-INSERT INTO "customers" ("customer_id","name","email","prefecture","city","address","post_code"."password_hash","created_at","updated_at") VALUES
-('fdd25989-085e-fc11-31f0-a4a25095a47d','波留太郎','sample1@gmail.com','北海道','札幌市','1-23-4','893-1101','9f738ce8457f291b18ee47e665e96baa84f38fcd','2024-11-5-12:00','2024-11-5 12:00'),
-('00c1ca81-8425-de90-9189-997acf91a0f0','波留次郎','sample2@gamil.com','東京','渋谷区','1-23-5','893-1102','194e13da720a1f025685e5d677eba8a1aff3860a','2024-11-5-12:00','2024-11-5 12:00'),
-('fcff5871-cff8-a199-fdbb-a8d0864c5143','波留三郎','sample3@gmail.com','愛知','名古屋市','1-23-6','893-1103','8b21c0e40c58a1e4b9180e4a293cf37998cf0e1c','2024-11-5-12:00','2024-11-5 12:00'),
-('ac1d4562-801c-ea25-c09d-fbd0838467d9','波留四郎','sample4@gmail.com','大阪','大阪市','1-23-7','893-1104','7daf403c7589f4927632ed3b6af762a992f09b78','2024-11-5-12:00','2024-11-5 12:00'),
-('506658a7-9b1b-3b35-5d81-0e616684a744','波留五郎','sample5gmail.com','福岡','博多市','1-23-8','893-1105','4f1cef8d900db702b7759ef360430fd6151362a1','2024-11-5-12:00','2024-11-5 12:00');
+);
+INSERT INTO "customers" ("customer_id","name","email","prefecture","city","address","post_code","password_hash","created_at","updated_at") VALUES
+('fdd25989-085e-fc11-31f0-a4a25095a47d','波留太郎','sample1@gmail.com','北海道','札幌市','1-23-4','8931101','9f738ce8457f291b18ee47e665e96baa84f38fcd','2024-11-5-12:00','2024-11-5 12:00'),
+('00c1ca81-8425-de90-9189-997acf91a0f0','波留次郎','sample2@gamil.com','東京','渋谷区','1-23-5','8931102','194e13da720a1f025685e5d677eba8a1aff3860a','2024-11-5-12:00','2024-11-5 12:00'),
+('fcff5871-cff8-a199-fdbb-a8d0864c5143','波留三郎','sample3@gmail.com','愛知','名古屋市','1-23-6','8931103','8b21c0e40c58a1e4b9180e4a293cf37998cf0e1c','2024-11-5-12:00','2024-11-5 12:00'),
+('ac1d4562-801c-ea25-c09d-fbd0838467d9','波留四郎','sample4@gmail.com','大阪','大阪市','1-23-7','8931104','7daf403c7589f4927632ed3b6af762a992f09b78','2024-11-5-12:00','2024-11-5 12:00'),
+('506658a7-9b1b-3b35-5d81-0e616684a744','波留五郎','sample5gmail.com','福岡','博多市','1-23-8','8931105','4f1cef8d900db702b7759ef360430fd6151362a1','2024-11-5-12:00','2024-11-5 12:00');
 
 ALTER TABLE "stocks"
 ADD FOREIGN KEY("auction_id") REFERENCES "auctions"("auction_id")
