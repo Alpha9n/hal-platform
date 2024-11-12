@@ -56,14 +56,27 @@ INSERT INTO "vehicles" ("vehicle_id","created_at","update_at","series_id","emplo
 CREATE TABLE "series" (
 	"series_id" UUID NOT NULL UNIQUE,
 	"name" VARCHAR(255),
+	"manufacturer_id" UUID NOT NULL,
 	PRIMARY KEY("series_id")
 )
-INSERT INTO "series" ("series_id","name",) VALUES
-(4b8dd422-f42b-6a62-63fd-4b1d215f6db6,'ホンダN-BOX'),
-(934b41ba-77af-2e6a-b247-4ef8045a752d,'トヨタプリウス'),
-(070acf9c-921e-2161-cdf0-1518e2301fb7,'ダイハツタント'),
-(7f335ca3-8c42-3cf0-54f5-0d3eaf3c568f,'日産セレナ'),
-(3ec04aac-5fef-9dcd-74f6-98be281bbb26,'トヨタアルファード');
+INSERT INTO "series" ("series_id","name","manufacturer_id") VALUES
+(4b8dd422-f42b-6a62-63fd-4b1d215f6db6,'N-BOX',ef532ea5-0aaf-b4a8-b93c-2b3e83adb7aa),
+(934b41ba-77af-2e6a-b247-4ef8045a752d,'プリウス',a56df6e6-c5c3-eaf6-5b43-eaa5a93735bc),
+(070acf9c-921e-2161-cdf0-1518e2301fb7,'タント',b10493e4-f656-9db4-7860-e15f4bcb77c0),
+(7f335ca3-8c42-3cf0-54f5-0d3eaf3c568f,'セレナ',7d2d5fae-6e3f-3e54-12bc-45b5d978b2d0),
+(3ec04aac-5fef-9dcd-74f6-98be281bbb26,'アルファード',4d5b386a-aa75-4242-e870-072e47360f6f);
+
+CREATE TABLE "manufacturers" (
+	"manufacturer_id" UUID NOT NULL UNIQUE,
+	"name" VARCHAR(255) NOT NULL,
+	PRIMARY KEY("manufacturer_id")
+)
+INSERT INTO manufacturers ("manufacturer_id","name") VALUES
+(ef532ea5-0aaf-b4a8-b93c-2b3e83adb7aa,'ホンダ'),
+(a56df6e6-c5c3-eaf6-5b43-eaa5a93735bc,'トヨタ'),
+(b10493e4-f656-9db4-7860-e15f4bcb77c0,'ダイハツ'),
+(7d2d5fae-6e3f-3e54-12bc-45b5d978b2d0,'日産'),
+(4d5b386a-aa75-4242-e870-072e47360f6f,'トヨタ');
 
 
 CREATE TABLE "employees" (
@@ -224,4 +237,7 @@ ADD FOREIGN KEY("customer_id") REFERENCES "customers"("customer_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE "contacts"
 ADD FOREIGN KEY("customer_id") REFERENCES "customers"("customer_id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "series"
+ADD FOREIGN KEY("manufacturer_id") REFERENCES "manufacturers"("manufacturer_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
