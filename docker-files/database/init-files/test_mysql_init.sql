@@ -144,7 +144,7 @@ CREATE TABLE "contacts" (
 	"created_at" TIMESTAMP,
 	"updated_at" TIMESTAMP,
 	PRIMARY KEY("contact_id")
-)
+);
 INSERT INTO "contacts" ("contact_id","customer_id","title","body","employee_id","created_at","updated_at") VALUES
 ('097f560d-7685-5ac8-eecb-a717311fc9e2','fdd25989-085e-fc11-31f0-a4a25095a47d','タイトル1','内容1','cd6c194b-aecb-8bac-c7cf-ad569ee9d5ea','2024-11-5 12:00','2024-11-5 12:00'),
 ('4ee04815-ebdc-e75a-c8be-b6baf455bb9f','00c1ca81-8425-de90-9189-997acf91a0f0','タイトル2','内容2','2c17a0db-6e8f-46cd-28d4-4b7e2f5ac535','2024-11-5 12:00','2024-11-5 12:00'),
@@ -195,7 +195,7 @@ CREATE TABLE "customers" (
 INSERT INTO "customers" ("customer_id","name","email","prefecture","city","address","post_code","password_hash","created_at","updated_at") VALUES
 ('fdd25989-085e-fc11-31f0-a4a25095a47d','波留太郎','sample1@gmail.com','北海道','札幌市','1-23-4','8931101','9f738ce8457f291b18ee47e665e96baa84f38fcd','2024-11-5-12:00','2024-11-5 12:00'),
 ('00c1ca81-8425-de90-9189-997acf91a0f0','波留次郎','sample2@gamil.com','東京','渋谷区','1-23-5','8931102','194e13da720a1f025685e5d677eba8a1aff3860a','2024-11-5-12:00','2024-11-5 12:00'),
-('fcff5871-cff8-a199-fdbb-a8d0864c5143','波留三郎','sample3@gmail.com','愛知','名古屋市','1-23-6','8931103','8b21c0e40c58a1e4b9180e4a293cf37998cf0e1c','2024-11-5-12:00','2024-11-5 12:00'),
+('fcff5871-cff8-a199-fdbb-a8d0864c5143','波留三郎','sample3@gmail.com','愛知','名古屋市','1-23-6','8931103','8b21c0e40c58a1e4b9180e4a293cf37998cf0e1c','2024-11-5 12:00','2024-11-5 12:00'),
 ('ac1d4562-801c-ea25-c09d-fbd0838467d9','波留四郎','sample4@gmail.com','大阪','大阪市','1-23-7','8931104','7daf403c7589f4927632ed3b6af762a992f09b78','2024-11-5-12:00','2024-11-5 12:00'),
 ('506658a7-9b1b-3b35-5d81-0e616684a744','波留五郎','sample5gmail.com','福岡','博多市','1-23-8','8931105','4f1cef8d900db702b7759ef360430fd6151362a1','2024-11-5-12:00','2024-11-5 12:00');
 
