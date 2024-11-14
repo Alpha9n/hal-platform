@@ -17,20 +17,26 @@ HALオークションのプラットフォームレポジトリ
 ```
 
 ## 開発環境構築手順
-**1. レポジトリをクローン**
+**1. 開発環境レポジトリをクローン**
+開発環境のdocker-compose.ymlを含むレポジトリをクローンします。
 ```bash
 git clone https://github.com/mentai-pasta/hal-platform
 ```
-**2. プロジェクトレポジトリをクローン**  
-*e.g. hal-auctionプロジェクトをクローン*
-```bash
-cd ./hal-auction/docker-files/node/projects
-git clone https://github.com/mentai-pasta/hal-auction
-```
-**3. Dockerコンテナをビルド**
+**2. Dockerコンテナをビルド**
 ```bash
 cd ../../
 docker-compose up --build
+```
+
+**3. nodeコンテナにVSCodeからアクセス**
+
+**4. プロジェクトレポジトリをクローン**  
+以下コマンドをnodeコンテナ内で実行してください
+```bash
+cd /home/node/projects/auction-app
+git clone https://github.com/mentai-pasta/auction-app.git
+cd auction-app/
+code -r .
 ```
 
 ## 命名規則について
