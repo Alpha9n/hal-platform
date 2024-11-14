@@ -12,11 +12,11 @@ services:
   node:
     container_name: node
     build: ./docker-files/node
-    working_dir: /home/node/app
+    working_dir: /home/node/projects
     ports:
       - "8080:8080" # backend
       - "3000:3000" # frontend
     volumes:
-      - "./docker-files/node/project:/home/node/app"
+      - "./docker-files/node/projects:/home/node/projects"
     tty: true
     stdin_open: true
