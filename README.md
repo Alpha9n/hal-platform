@@ -24,7 +24,7 @@ git clone https://github.com/mentai-pasta/hal-platform
 ```
 **2. Dockerコンテナをビルド**
 ```bash
-cd ../../
+cd ./hal-platform
 docker-compose up --build
 ```
 
@@ -33,7 +33,7 @@ docker-compose up --build
 **4. プロジェクトレポジトリをクローン**  
 以下コマンドをnodeコンテナ内で実行してください
 ```bash
-cd /home/node/projects/auction-app
+cd /home/node/projects/
 git clone https://github.com/mentai-pasta/auction-app.git
 cd auction-app/
 code -r .
