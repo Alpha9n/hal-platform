@@ -4,9 +4,9 @@ CREATE DATABASE auction;
 
 -- テストデータ生成
 CREATE TABLE "auctions" (
-	"auction_id" UUID NOT NULL UNIQUE,
-	"created_at" TIMESTAMP NOT NULL,
-	"updated_at" TIMESTAMP NOT NULL,
+	"auction_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
+	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"employee_id" UUID NOT NULL,
 	"duration" INTERVAL NOT NULL,
 	"begin_time" TIMESTAMP NOT NULL,
@@ -21,9 +21,9 @@ INSERT INTO "auctions" ("auction_id","created_at","updated_at","employee_id","du
 
 
 CREATE TABLE "stocks" (
-	"stock_id" UUID NOT NULL UNIQUE,
-	"created_at" TIMESTAMP NOT NULL,
-	"updated_at" TIMESTAMP NOT NULL,
+	"stock_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
+	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"auction_id" UUID NOT NULL,
 	"vehicle_id" UUID NOT NULL,
 	"sold_status_id" UUID NOT NULL,
@@ -38,9 +38,9 @@ INSERT INTO "stocks" ("stock_id","created_at","updated_at","auction_id","vehicle
 ('1f58ea45-2896-64c4-9f3d-2bae5048a663','2024-11-5 12:00','2024-11-5 12:00','5f539df0-6706-d72e-95b8-d148c73ce902','614cd781-4e09-1d1f-e039-d9cc15f6af68','aeed5ffd-d3c6-2bcf-120a-e3f86597c55d','2024-11-10 12:00');
 
 CREATE TABLE "vehicles" (
-	"vehicle_id" UUID NOT NULL UNIQUE,
-	"created_at" TIMESTAMP NOT NULL,
-	"updated_at" TIMESTAMP NOT NULL,
+	"vehicle_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
+	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"series_id" UUID NOT NULL,
 	"employee_id" UUID NOT NULL,
 	PRIMARY KEY("vehicle_id")
@@ -54,7 +54,7 @@ INSERT INTO "vehicles" ("vehicle_id","created_at","updated_at","series_id","empl
 
 
 CREATE TABLE "series" (
-	"series_id" UUID NOT NULL UNIQUE,
+	"series_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	"name" VARCHAR(255),
 	"manufacturer_id" UUID NOT NULL,
 	PRIMARY KEY("series_id")
@@ -67,7 +67,7 @@ INSERT INTO "series" ("series_id","name","manufacturer_id") VALUES
 ('3ec04aac-5fef-9dcd-74f6-98be281bbb26','アルファード','4d5b386a-aa75-4242-e870-072e47360f6f');
 
 CREATE TABLE "manufacturers" (
-	"manufacturer_id" UUID NOT NULL UNIQUE,
+	"manufacturer_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	"name" VARCHAR(255) NOT NULL,
 	PRIMARY KEY("manufacturer_id")
 );
@@ -80,7 +80,7 @@ INSERT INTO manufacturers ("manufacturer_id","name") VALUES
 
 
 CREATE TABLE "employees" (
-	"employee_id" UUID NOT NULL UNIQUE,
+	"employee_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	"name" VARCHAR(255) NOT NULL,
 	"job_type_id" UUID NOT NULL,
 	PRIMARY KEY("employee_id")
@@ -94,7 +94,7 @@ INSERT INTO "employees" ("employee_id","name","job_type_id") VALUES
 
 
 CREATE TABLE "job_types" (
-	"job_type_id" UUID NOT NULL UNIQUE,
+	"job_type_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	"name" VARCHAR(255) NOT NULL,
 	PRIMARY KEY("job_type_id")
 );
@@ -106,11 +106,11 @@ INSERT INTO "job_types" ("job_type_id","name") VALUES
 ('1b77802c-6db4-bf84-3d64-7fee92a6eb93','総務');
 
 CREATE TABLE "notifications" (
-	"notification_id" UUID NOT NULL UNIQUE,
+	"notification_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	"title" VARCHAR(255) NOT NULL,
 	"body" VARCHAR(255),
-	"created_at" TIMESTAMP NOT NULL,
-	"updated_at" TIMESTAMP NOT NULL,
+	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"employee_id" UUID NOT NULL,
 	"deploy_schedule" TIMESTAMP,
 	"deploy_status_id" UUID,
@@ -124,7 +124,7 @@ INSERT INTO "notifications" ("notification_id","title","body","created_at","upda
 ('80eb70cf-1075-c29c-86b1-ed6d0e26dceb','タイトル5','本文5','2024-11-5 12:00','2024-11-5 12:00','2ae3f345-6b17-7171-612d-de2f5a23cd98','2024-11-5 12:00','805fef9c-39c0-4840-ba2d-77a7b844e476');
 
 CREATE TABLE "deploy_statuses" (
-	"deploy_status_id" UUID NOT NULL UNIQUE,
+	"deploy_status_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	"name" VARCHAR(255) NOT NULL,
 	PRIMARY KEY("deploy_status_id")
 );
@@ -136,13 +136,13 @@ INSERT INTO "deploy_statuses" ("deploy_status_id","name") VALUES
 ('805fef9c-39c0-4840-ba2d-77a7b844e476','public2');
 
 CREATE TABLE "contacts" (
-	"contact_id" UUID NOT NULL UNIQUE,
+	"contact_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	"customer_id" UUID NOT NULL,
 	"title" VARCHAR(255) NOT NULL,
 	"body" VARCHAR(255) NOT NULL,
 	"employee_id" UUID,
-	"created_at" TIMESTAMP,
-	"updated_at" TIMESTAMP,
+	"created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY("contact_id")
 );
 INSERT INTO "contacts" ("contact_id","customer_id","title","body","employee_id","created_at","updated_at") VALUES
@@ -153,7 +153,7 @@ INSERT INTO "contacts" ("contact_id","customer_id","title","body","employee_id",
 ('9c85ef35-267d-39e7-ff1d-9bd5700f6fea','506658a7-9b1b-3b35-5d81-0e616684a744','タイトル5','内容5','2ae3f345-6b17-7171-612d-de2f5a23cd98','2024-11-5 12:00','2024-11-5 12:00');
 
 CREATE TABLE "sold_statuses" (
-	"sold_status_id" UUID NOT NULL UNIQUE,
+	"sold_status_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	"name" VARCHAR(255) NOT NULL,
 	PRIMARY KEY("sold_status_id")
 );
@@ -165,11 +165,11 @@ INSERT INTO "sold_statuses" ("sold_status_id","name") VALUES
 ('aeed5ffd-d3c6-2bcf-120a-e3f86597c55d','出品取り消し');
 
 CREATE TABLE "bids" (
-	"bid_id" UUID NOT NULL UNIQUE,
+	"bid_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	"customer_id" UUID NOT NULL,
 	"stock_id" UUID NOT NULL,
 	"price" NUMERIC,
-	"created_at" TIMESTAMP,
+	"created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY("bid_id")
 );
 INSERT INTO "bids" ("bid_id","customer_id","stock_id","price","created_at") VALUES
@@ -180,7 +180,7 @@ INSERT INTO "bids" ("bid_id","customer_id","stock_id","price","created_at") VALU
 ('76402870-ee8f-e8df-5dbc-727179443360','506658a7-9b1b-3b35-5d81-0e616684a744','1f58ea45-2896-64c4-9f3d-2bae5048a663',500000,'2024-11-5 12:00');
 
 CREATE TABLE "customers" (
-	"customer_id" UUID NOT NULL UNIQUE,
+	"customer_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	"name" VARCHAR(255) NOT NULL,
 	"email" VARCHAR(255) NOT NULL,
 	"prefecture" VARCHAR(255),
@@ -188,8 +188,8 @@ CREATE TABLE "customers" (
 	"address" VARCHAR(255),
 	"post_code" VARCHAR(7),
 	"password_hash" VARCHAR(255) NOT NULL,
-	"created_at" TIMESTAMP,
-	"updated_at" TIMESTAMP,
+	"created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY("customer_id")
 );
 INSERT INTO "customers" ("customer_id","name","email","prefecture","city","address","post_code","password_hash","created_at","updated_at") VALUES
@@ -198,6 +198,38 @@ INSERT INTO "customers" ("customer_id","name","email","prefecture","city","addre
 ('fcff5871-cff8-a199-fdbb-a8d0864c5143','波留三郎','sample3@gmail.com','愛知','名古屋市','1-23-6','8931103','8b21c0e40c58a1e4b9180e4a293cf37998cf0e1c','2024-11-5 12:00','2024-11-5 12:00'),
 ('ac1d4562-801c-ea25-c09d-fbd0838467d9','波留四郎','sample4@gmail.com','大阪','大阪市','1-23-7','8931104','7daf403c7589f4927632ed3b6af762a992f09b78','2024-11-5 12:00','2024-11-5 12:00'),
 ('506658a7-9b1b-3b35-5d81-0e616684a744','波留五郎','sample5gmail.com','福岡','博多市','1-23-8','8931105','4f1cef8d900db702b7759ef360430fd6151362a1','2024-11-5 12:00','2024-11-5 12:00');
+
+CREATE OR REPLACE FUNCTION update_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+	NEW.updated_at = NOW();
+	RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+CREATE TRIGGER update_auctions_table_modtime
+BEFORE UPDATE ON "auctions"
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
+
+CREATE TRIGGER update_stocks_table_modtime
+BEFORE UPDATE ON "stocks"
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
+
+CREATE TRIGGER update_vehicles_table_modtime
+BEFORE UPDATE ON "vehicles"
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
+
+CREATE TRIGGER update_notifications_table_modtime
+BEFORE UPDATE ON "notifications"
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
+
+CREATE TRIGGER update_contacts_table_modtime
+BEFORE UPDATE ON "contacts"
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
+
+CREATE TRIGGER update_customers_table_modtime
+BEFORE UPDATE ON "customers"
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
 
 ALTER TABLE "stocks"
 ADD FOREIGN KEY("auction_id") REFERENCES "auctions"("auction_id")
