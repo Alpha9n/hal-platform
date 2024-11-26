@@ -4,12 +4,12 @@ CREATE DATABASE auction;
 
 -- テストデータ生成
 CREATE TABLE "auctions" (
-	"auction_id" UUID NOT NULL UNIQUE DEFAULT random_gen_uuid(),
-	"created_at" TIMESTAMPZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"updated_at" TIMESTAMPZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"auction_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
+	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"employee_id" UUID NOT NULL,
 	"duration" INTERVAL NOT NULL,
-	"begin_time" TIMESTAMPZ NOT NULL,
+	"begin_time" TIMESTAMP NOT NULL,
 	PRIMARY KEY("auction_id")
 );
 INSERT INTO "auctions" ("auction_id","created_at","updated_at","employee_id","duration","begin_time") VALUES
@@ -22,12 +22,12 @@ INSERT INTO "auctions" ("auction_id","created_at","updated_at","employee_id","du
 
 CREATE TABLE "stocks" (
 	"stock_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
-	"created_at" TIMESTAMPZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"updated_at" TIMESTAMPZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"auction_id" UUID NOT NULL,
 	"vehicle_id" UUID NOT NULL,
 	"sold_status_id" UUID NOT NULL,
-	"begin_time" TIMESTAMPZ NOT NULL,
+	"begin_time" TIMESTAMP NOT NULL,
 	PRIMARY KEY("stock_id")
 );
 INSERT INTO "stocks" ("stock_id","created_at","updated_at","auction_id","vehicle_id","sold_status_id","begin_time") VALUES
@@ -39,8 +39,8 @@ INSERT INTO "stocks" ("stock_id","created_at","updated_at","auction_id","vehicle
 
 CREATE TABLE "vehicles" (
 	"vehicle_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
-	"created_at" TIMESTAMPZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"updated_at" TIMESTAMPZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"series_id" UUID NOT NULL,
 	"employee_id" UUID NOT NULL,
 	PRIMARY KEY("vehicle_id")
@@ -109,10 +109,10 @@ CREATE TABLE "notifications" (
 	"notification_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	"title" VARCHAR(255) NOT NULL,
 	"body" VARCHAR(255),
-	"created_at" TIMESTAMPZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"updated_at" TIMESTAMPZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"employee_id" UUID NOT NULL,
-	"deploy_schedule" TIMESTAMPZ,
+	"deploy_schedule" TIMESTAMP,
 	"deploy_status_id" UUID,
 	PRIMARY KEY("notification_id")
 );
@@ -141,8 +141,8 @@ CREATE TABLE "contacts" (
 	"title" VARCHAR(255) NOT NULL,
 	"body" VARCHAR(255) NOT NULL,
 	"employee_id" UUID,
-	"created_at" TIMESTAMPZ DEFAULT CURRENT_TIMESTAMP,
-	"updated_at" TIMESTAMPZ DEFAULT CURRENT_TIMESTAMP,
+	"created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY("contact_id")
 );
 INSERT INTO "contacts" ("contact_id","customer_id","title","body","employee_id","created_at","updated_at") VALUES
@@ -169,7 +169,7 @@ CREATE TABLE "bids" (
 	"customer_id" UUID NOT NULL,
 	"stock_id" UUID NOT NULL,
 	"price" NUMERIC,
-	"created_at" TIMESTAMPZ DEFAULT CURRENT_TIMESTAMP,
+	"created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY("bid_id")
 );
 INSERT INTO "bids" ("bid_id","customer_id","stock_id","price","created_at") VALUES
@@ -188,8 +188,8 @@ CREATE TABLE "customers" (
 	"address" VARCHAR(255),
 	"post_code" VARCHAR(7),
 	"password_hash" VARCHAR(255) NOT NULL,
-	"created_at" TIMESTAMPZ DEFAULT CURRENT_TIMESTAMP,
-	"updated_at" TIMESTAMPZ DEFAULT CURRENT_TIMESTAMP,
+	"created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY("customer_id")
 );
 INSERT INTO "customers" ("customer_id","name","email","prefecture","city","address","post_code","password_hash","created_at","updated_at") VALUES
@@ -198,6 +198,38 @@ INSERT INTO "customers" ("customer_id","name","email","prefecture","city","addre
 ('fcff5871-cff8-a199-fdbb-a8d0864c5143','波留三郎','sample3@gmail.com','愛知','名古屋市','1-23-6','8931103','8b21c0e40c58a1e4b9180e4a293cf37998cf0e1c','2024-11-5 12:00','2024-11-5 12:00'),
 ('ac1d4562-801c-ea25-c09d-fbd0838467d9','波留四郎','sample4@gmail.com','大阪','大阪市','1-23-7','8931104','7daf403c7589f4927632ed3b6af762a992f09b78','2024-11-5 12:00','2024-11-5 12:00'),
 ('506658a7-9b1b-3b35-5d81-0e616684a744','波留五郎','sample5gmail.com','福岡','博多市','1-23-8','8931105','4f1cef8d900db702b7759ef360430fd6151362a1','2024-11-5 12:00','2024-11-5 12:00');
+
+CREATE OR REPLACE FUNCTION update_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+	NEW.updated_at = NOW();
+	RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+CREATE TRIGGER update_auctions_table_modtime
+BEFORE UPDATE ON "auctions"
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
+
+CREATE TRIGGER update_stocks_table_modtime
+BEFORE UPDATE ON "stocks"
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
+
+CREATE TRIGGER update_vehicles_table_modtime
+BEFORE UPDATE ON "vehicles"
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
+
+CREATE TRIGGER update_notifications_table_modtime
+BEFORE UPDATE ON "notifications"
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
+
+CREATE TRIGGER update_contacts_table_modtime
+BEFORE UPDATE ON "contacts"
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
+
+CREATE TRIGGER update_customers_table_modtime
+BEFORE UPDATE ON "customers"
+FOR EACH ROW EXECUTE PROCEDURE update_timestamp();
 
 ALTER TABLE "stocks"
 ADD FOREIGN KEY("auction_id") REFERENCES "auctions"("auction_id")
