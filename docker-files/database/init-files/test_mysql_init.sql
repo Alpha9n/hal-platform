@@ -55,7 +55,7 @@ INSERT INTO "vehicles" ("vehicle_id","created_at","updated_at","series_id","empl
 
 CREATE TABLE "series" (
 	"series_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
-	"name" VARCHAR(255),
+	"name" VARCHAR(255) NOT NULL,
 	"manufacturer_id" UUID NOT NULL,
 	PRIMARY KEY("series_id")
 );
