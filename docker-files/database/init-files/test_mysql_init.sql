@@ -241,3 +241,15 @@ ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE "series"
 ADD FOREIGN KEY("manufacturer_id") REFERENCES "manufacturers"("manufacturer_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+
+CREATE TABLE "iamges"{
+	"image_id" UUID NOT NULL UNIQUE,
+	"url" VARCHAR(255) NOT NULL,
+}
+
+CREATE TABLE "iamges_stocks"{
+	"image_id" UUID NOT NULL UNIQUE,
+	"stock_id" UUID NOT NULL,
+}
