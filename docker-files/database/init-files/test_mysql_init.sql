@@ -218,7 +218,7 @@ INSERT INTO "images" ("image_id", "url") VALUES
 
 CREATE TABLE "images_stocks" (
 	"image_id" UUID NOT NULL,
-	"stock_id" UUID NOT NULL,
+	"stock_id" UUID NOT NULL
 );
 
 INSERT INTO "images_stocks" ("image_id", "stock_id") VALUES
