@@ -199,6 +199,40 @@ INSERT INTO "customers" ("customer_id","name","email","prefecture","city","addre
 ('ac1d4562-801c-ea25-c09d-fbd0838467d9','波留四郎','sample4@gmail.com','大阪','大阪市','1-23-7','8931104','7daf403c7589f4927632ed3b6af762a992f09b78','2024-11-5 12:00','2024-11-5 12:00'),
 ('506658a7-9b1b-3b35-5d81-0e616684a744','波留五郎','sample5gmail.com','福岡','博多市','1-23-8','8931105','4f1cef8d900db702b7759ef360430fd6151362a1','2024-11-5 12:00','2024-11-5 12:00');
 
+CREATE TABLE "images" (
+	"image_id" UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
+	"url" VARCHAR(255) NOT NULL
+);
+
+INSERT INTO "images" ("image_id", "url") VALUES
+('b1db3622-3162-9a45-1742-44c4e3d9105b', 'https://auction-stocks.kosuke.dev/P1.png'),
+('75ce8818-153f-51ec-9da0-d760ef15fc21', 'https://auction-stocks.kosuke.dev/P2.png'),
+('5fc991dc-8b9f-0657-19a3-d22eea9bb6f2', 'https://auction-stocks.kosuke.dev/P3.png'),
+('0d6a1a07-732e-bc4c-5fb6-a318e398f6ed', 'https://auction-stocks.kosuke.dev/P4.png'),
+('bac935a0-2d29-0352-bb2c-4b1e5d8b2090', 'https://auction-stocks.kosuke.dev/P5.png'),
+('8e76fb04-b565-d926-e9c7-3d408bd5fdf9', 'https://auction-stocks.kosuke.dev/P6.png'),
+('f3724ad6-96a8-bde3-3a6e-52c801de0358', 'https://auction-stocks.kosuke.dev/P7.png'),
+('f73aef5e-a62e-ee37-aa6b-1fa670f31c99', 'https://auction-stocks.kosuke.dev/P8.png'),
+('fb519de9-10df-ce32-f40e-15a4ac9de00a', 'https://auction-stocks.kosuke.dev/P9.png'),
+('fa6d6174-1d28-57e3-0047-03551e7bf9d5', 'https://auction-stocks.kosuke.dev/P10.png');
+
+CREATE TABLE "images_stocks" (
+	"image_id" UUID NOT NULL,
+	"stock_id" UUID NOT NULL
+);
+
+INSERT INTO "images_stocks" ("image_id", "stock_id") VALUES
+('b1db3622-3162-9a45-1742-44c4e3d9105b', '97775fad-caac-b824-0aa4-bfc2f20e38e4'),
+('75ce8818-153f-51ec-9da0-d760ef15fc21', '97775fad-caac-b824-0aa4-bfc2f20e38e4'),
+('5fc991dc-8b9f-0657-19a3-d22eea9bb6f2', '97775fad-caac-b824-0aa4-bfc2f20e38e4'),
+('0d6a1a07-732e-bc4c-5fb6-a318e398f6ed', '97775fad-caac-b824-0aa4-bfc2f20e38e4'),
+('bac935a0-2d29-0352-bb2c-4b1e5d8b2090', '97775fad-caac-b824-0aa4-bfc2f20e38e4'),
+('8e76fb04-b565-d926-e9c7-3d408bd5fdf9', '97775fad-caac-b824-0aa4-bfc2f20e38e4'),
+('f3724ad6-96a8-bde3-3a6e-52c801de0358', '97775fad-caac-b824-0aa4-bfc2f20e38e4'),
+('f73aef5e-a62e-ee37-aa6b-1fa670f31c99', '97775fad-caac-b824-0aa4-bfc2f20e38e4'),
+('fb519de9-10df-ce32-f40e-15a4ac9de00a', '97775fad-caac-b824-0aa4-bfc2f20e38e4'),
+('fa6d6174-1d28-57e3-0047-03551e7bf9d5', '97775fad-caac-b824-0aa4-bfc2f20e38e4');
+
 CREATE OR REPLACE FUNCTION update_timestamp()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -272,4 +306,10 @@ ADD FOREIGN KEY("customer_id") REFERENCES "customers"("customer_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE "series"
 ADD FOREIGN KEY("manufacturer_id") REFERENCES "manufacturers"("manufacturer_id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "images_stocks"
+ADD FOREIGN KEY("image_id") REFERENCES "images"("image_id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "images_stocks"
+ADD FOREIGN KEY("stock_id") REFERENCES "stocks"("stock_id")
 ON UPDATE NO ACTION ON DELETE NO ACTION;
