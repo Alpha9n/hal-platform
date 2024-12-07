@@ -7,6 +7,7 @@ services:
     working_dir: /home/node/projects/auction-app
     command: >
       bash -c 'pnpm install --frozen-lockfile &&
+      pnpm run init &&
       pnpm run build &&
       pnpm run start'
     tty: false
