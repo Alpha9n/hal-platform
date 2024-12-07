@@ -22,6 +22,7 @@ HALオークションのプラットフォームレポジトリ
 ```bash
 git clone https://github.com/mentai-pasta/hal-platform
 ```
+
 **2. Dockerコンテナをビルド**
 ```bash
 cd ./hal-platform
@@ -31,11 +32,13 @@ docker-compose up --build
 **3. nodeコンテナにVSCodeからアクセス**
 
 **4. プロジェクトレポジトリをクローン**  
-以下コマンドをnodeコンテナ内で実行してください
+以下コマンドを**nodeコンテナ内で**実行してください
 ```bash
 cd /home/node/projects/
 git clone https://github.com/mentai-pasta/auction-app.git
 cd auction-app/
+pnpm i
+pnpm run init
 code -r .
 ```
 
