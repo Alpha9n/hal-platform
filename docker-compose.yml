@@ -19,6 +19,9 @@ services:
       - "3000:3000" # frontend
       - "3001:3001" # backend
     volumes:
-      - "./docker-files/node/projects:/home/node/projects"
+      - node-data:/home/node/projects
     tty: true
     stdin_open: true
+
+volumes:
+  node-data:
