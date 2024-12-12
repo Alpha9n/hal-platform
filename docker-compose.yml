@@ -9,6 +9,7 @@ services:
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
+      TZ: "Asia/Tokyo"
   node:
     container_name: node
     build: ./docker-files/node
@@ -22,6 +23,8 @@ services:
       - node-data:/home/node/projects
     tty: true
     stdin_open: true
+    environment:
+      TZ: "Asia/Tokyo"
 
 volumes:
   node-data:
